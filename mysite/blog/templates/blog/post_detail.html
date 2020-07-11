@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'blog/base.html' %}
 {% block title %} {{ post.title }} {% endblock title %}
 {% block content %}
 
@@ -11,7 +11,7 @@
         <p class="card-text ">{{ post.content | safe }}</p>
       </div>
     </div>
-    {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+    {% block sidebar %} {% include 'blog/sidebar.html' %} {% endblock sidebar %}
     <div class="col-md-8 card mb-4 mt-3">
       <div class="card-body">
         <!-- comments -->

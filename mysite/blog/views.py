@@ -8,7 +8,7 @@ def PostList(request):
     posts = Post.objects.filter(status=1).order_by('-created_on')
     paginator = Paginator(posts, 1)  # 3 posts in each page
     page = request.GET.get('page')
-    template_name = 'index.html'
+    template_name = 'blog/index.html'
     try:
         post_list = paginator.page(page)
     except PageNotAnInteger:
@@ -21,7 +21,7 @@ def PostList(request):
 
 
 def PostDetail(request, slug):
-    template_name = 'post_detail.html'
+    template_name = 'blog/post_detail.html'
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.filter(active=True)
     new_comment = None

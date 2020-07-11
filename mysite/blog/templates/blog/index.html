@@ -1,4 +1,4 @@
-{% extends "base.html" %} 
+{% extends 'blog/base.html' %} 
 {% block content %}
 <style>
     body {
@@ -45,7 +45,7 @@
             </div>
             {% endfor %}
         </div>
-        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+        {% block sidebar %} {% include 'blog/sidebar.html' %} {% endblock sidebar %}
     </div>
 </div>
 {% if post_list.has_other_pages %}
