@@ -6,7 +6,7 @@ from .models import Post
 
 def PostList(request):
     posts = Post.objects.filter(status=1).order_by('-created_on')
-    paginator = Paginator(posts, 1) # 3 posts in each page
+    paginator = Paginator(posts, 1)  # 3 posts in each page
     page = request.GET.get('page')
     template_name = 'index.html'
     try:
@@ -16,8 +16,8 @@ def PostList(request):
     except EmptyPage:
         post_list = paginator.page(paginator.num_pages)
     return render(request, template_name, {'page': page,
-                                            'post_list': post_list
-                                            })
+                                           'post_list': post_list
+                                           })
 
 
 def PostDetail(request, slug):
@@ -34,7 +34,7 @@ def PostDetail(request, slug):
             new_comment.save()
     else:
         comment_form = CommentForm()
-    return render (request, template_name, {'post': post,
-                                            'comments': comments,
-                                            'new_comment': new_comment,
-                                            'comment_form': comment_form})
+    return render(request, template_name, {'post': post,
+                                           'comments': comments,
+                                           'new_comment': new_comment,
+                                           'comment_form': comment_form})
