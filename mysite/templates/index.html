@@ -48,7 +48,7 @@
         {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
     </div>
 </div>
-{% if not post_list.has_other_page %}
+{% if post_list.has_other_pages %}
     <nav aria-label="Page navigation container"></nav>
     <ul class="pagination justify-content-center">
         {% if post_list.has_previous %}
