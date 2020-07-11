@@ -1,12 +1,23 @@
 from .forms import CommentForm
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import Post
 
 
 def PostList(request):
     posts = Post.objects.filter(status=1).order_by('-created_on')
+    paginator = Paginator(posts, 1) # 3 posts in each page
+    page = request.GET.get('page')
     template_name = 'index.html'
-    return render(request, template_name, {'post_list': posts})
+    try:
+        post_list = paginator.page(page)
+    except PageNotAnInteger:
+        post_list = paginator.page(1)
+    except EmptyPage:
+        post_list = paginator.page(paginator.num_pages)
+    return render(request, template_name, {'page': page,
+                                            'post_list': post_list
+                                            })
 
 
 def PostDetail(request, slug):
