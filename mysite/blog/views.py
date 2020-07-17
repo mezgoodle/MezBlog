@@ -6,7 +6,7 @@ from .models import Post
 
 def PostList(request):
     posts = Post.objects.filter(status=1).order_by('-created_on')
-    paginator = Paginator(posts, 1)  # 3 posts in each page
+    paginator = Paginator(posts, 3)  # 3 posts in each page
     page = request.GET.get('page')
     template_name = 'blog/index.html'
     try:
