@@ -1,5 +1,5 @@
 from .models import Comment
-from django.forms import ModelForm, TextInput, Textarea, EmailInput
+from django.forms import ModelForm, TextInput, Textarea, EmailInput, Form, CharField, EmailField
 
 
 class CommentForm(ModelForm):
@@ -20,3 +20,10 @@ class CommentForm(ModelForm):
                 'placeholder': 'Enter comment',
             }),
         }
+
+
+class EmailPostForm(Form):
+    name = CharField(max_length=25)
+    email = EmailField()
+    to = EmailField()
+    comments = CharField(required=False, widget=Textarea)
