@@ -9,11 +9,9 @@
         <h1>{{ post.title }}</h1>
         <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
         <p class="card-text ">{{ post.content | safe }}</p>
+        <a class="btn btn-primary" href="{% url 'blog:post_share' post.id %}" role="button">Share this post</a>
       </div>
     </div>
-    <p>
-      <a href="{% url 'blog:post_share' post.id %}">Share this post</a>
-    </p>
     {% block sidebar %} {% include 'blog/sidebar.html' %} {% endblock sidebar %}
     <div class="col-md-8 card mb-4 mt-3">
       <div class="card-body">

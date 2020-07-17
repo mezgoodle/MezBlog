@@ -5,11 +5,13 @@
         <h1>E-mail successfully sent</h1>
         <p>"{{ post.title }}" was successfully sent to {{ form.cleaned_data.to }}.</p>
     {% else %}
+    <div class="container">
         <h1>Share "{{ post.title }}" by e-mail</h1>
         <form method="post">
             {{ form.as_p }}
             {% csrf_token %}
-            <input type="submit" value="Send e-mail">
+            <button type="submit" class="btn btn-primary">Send e-mail</button>
         </form>
+    </div>
     {% endif %}
 {% endblock %}
