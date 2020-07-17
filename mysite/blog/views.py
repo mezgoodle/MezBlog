@@ -1,4 +1,4 @@
-from .forms import CommentForm
+from .forms import CommentForm, EmailPostForm
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import Post
@@ -38,3 +38,16 @@ def PostDetail(request, slug):
                                            'comments': comments,
                                            'new_comment': new_comment,
                                            'comment_form': comment_form})
+
+
+def post_share(request, post_id):
+    template_name = 'blog/post_share.html'
+    post = get_object_or_404(Post, id=post_id, status=1)
+    if request.method == 'POST':
+        form = EmailPostForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data()
+            # ... send email
+    else:
+        form = EmailPostForm()
+    return render(request, template_name, {'post': post, 'form': form})
