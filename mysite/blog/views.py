@@ -1,4 +1,4 @@
-from .forms import CommentForm, EmailPostForm
+from .forms import CommentForm, EmailPostForm, PostForm
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.mail import send_mail
@@ -63,4 +63,18 @@ def post_share(request, post_id):
 
 def post_create(request):
     template_name = 'blog/create.html'
-    return render(request, template_name)
+    sent = False
+    title = None
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            subject = 'Suggest new article'
+            message = f"Author: {cd['author']}\n\nEmail: {cd['email']}\n\nTitle: {cd['title']}\n\nContent: {cd['content']}\n\n"
+            to = 'mezgoodle@gmail.com'
+            send_mail(subject, message, cd['email'], [to])
+            title = cd['title']
+            sent = True
+    else:
+        form = PostForm()
+    return render(request, template_name, {'form': form, 'sent': sent, 'title': title})
