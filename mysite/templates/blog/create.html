@@ -1,7 +1,17 @@
 {% extends 'blog/base.html' %}
-{% block title %}Share a post{% endblock %}
+{% block title %}Create a post{% endblock %}
 {% block content %}
+    {% if sent %}
+        <h1>Article successfully sent</h1>
+        <p>"{{ title }}" was successfully sent to administrator.</p>
+    {% else %}
     <div class="container">
-        Hello World!
+        <h1>Write your opinion!</h1>
+        <form method="post" class="mt-2">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Send article</button>
+        </form>
     </div>
+    {% endif %}
 {% endblock %}
