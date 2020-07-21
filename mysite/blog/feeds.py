@@ -2,7 +2,6 @@ from django.contrib.syndication.views import Feed
 from django.template.defaultfilters import truncatewords
 from django.utils.feedgenerator import Atom1Feed
 from .models import Post
-from django.urls import reverse
 
 
 class LatestPostsFeed(Feed):

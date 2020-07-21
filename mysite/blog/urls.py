@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.PostList, name='home'),
     path('<slug:slug>/', views.PostDetail, name='post_detail'),
     path('<int:post_id>/share/', views.post_share, name='post_share'),
+    path('create', views.post_create, name='post_create'),
     path('feed/rss', LatestPostsFeed(), name='post_feed'),
     path('feed/atom', AtomSiteNewsFeed()),
 ]

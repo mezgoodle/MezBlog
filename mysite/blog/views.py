@@ -59,3 +59,8 @@ def post_share(request, post_id):
     return render(
         request, template_name, {
             'post': post, 'form': form, 'sent': sent})
+
+
+def post_create(request):
+    template_name = 'blog/create.html'
+    return render(request, template_name)
