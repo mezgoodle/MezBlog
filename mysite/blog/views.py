@@ -16,9 +16,8 @@ def PostList(request):
         post_list = paginator.page(1)
     except EmptyPage:
         post_list = paginator.page(paginator.num_pages)
-    return render(request, template_name, {'page': page,
-                                           'post_list': post_list
-                                           })
+    context = {'page': page, 'post_list': post_list}
+    return render(request, template_name, context)
 
 
 def PostDetail(request, slug):
@@ -35,10 +34,8 @@ def PostDetail(request, slug):
             new_comment.save()
     else:
         comment_form = CommentForm()
-    return render(request, template_name, {'post': post,
-                                           'comments': comments,
-                                           'new_comment': new_comment,
-                                           'comment_form': comment_form})
+    context = {'post': post, 'comments': comments, 'new_comment': new_comment, 'comment_form': comment_form}
+    return render(request, template_name, context)
 
 
 def post_share(request, post_id):
@@ -56,9 +53,8 @@ def post_share(request, post_id):
             sent = True
     else:
         form = EmailPostForm()
-    return render(
-        request, template_name, {
-            'post': post, 'form': form, 'sent': sent})
+    context = {'post': post, 'form': form, 'sent': sent}
+    return render(request, template_name, context)
 
 
 def post_create(request):
@@ -77,4 +73,5 @@ def post_create(request):
             sent = True
     else:
         form = PostForm()
-    return render(request, template_name, {'form': form, 'sent': sent, 'title': title})
+    context = {'form': form, 'sent': sent, 'title': title}
+    return render(request, template_name, context)
